@@ -78,6 +78,28 @@ ruleTester.run("limit-callee", rule, {
         ]
       ],
       errors: [{ message: 'The use of `inject` is not allowed in this directory.' }]
+    },
+
+    {
+      code: 'provide("test");',
+      filename: '/src/views/house-list',
+      options: [
+        [
+          {
+            limitCallee: 'inject',
+            limitDir: [
+              '/src/views/house-list'
+            ]
+          },
+          {
+            limitCallee: 'provide',
+            limitDir: [
+              '/src/views/house-list'
+            ]
+          },
+        ]
+      ],
+      errors: [{ message: 'The use of `provide` is not allowed in this directory.' }]
     }
   ],
 });
